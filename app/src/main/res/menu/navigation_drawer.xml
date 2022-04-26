@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/g"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashbordFragment"
+            android:title="emploi du temps "
+             />
+        <item
+            android:id="@+id/blankFragment"
+            android:title="calendrier d'examen " />
+        <item
+            android:id="@+id/les_notes"
+            android:title="les note " />
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/paiement"
+            android:title="paiements "
+             />
+        <item
+            android:id="@+id/absences"
+            android:title="absences " />
+        <item
+            android:id="@+id/actualités"
+            android:title="actualité" />
+    </group>
+
+    <group
+        android:id="@+id/group3"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/logOut"
+            android:title="log out " />
+    </group>
+
+
+</menu>
