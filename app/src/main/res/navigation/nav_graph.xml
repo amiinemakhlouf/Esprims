@@ -25,8 +25,23 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="esprims.gi2.esprims.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+        android:id="@+id/noteFragment"
+        android:name="esprims.gi2.esprims.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note" />
+    <fragment
+        android:id="@+id/emlpoiExamenFragment"
+        android:name="esprims.gi2.esprims.EmlpoiExamenFragment"
+        android:label="fragment_emlpoi_examen"
+        tools:layout="@layout/fragment_emlpoi_examen" />
+    <fragment
+        android:id="@+id/payementFragment"
+        android:name="esprims.gi2.esprims.PayementFragment"
+        android:label="fragment_payement"
+        tools:layout="@layout/fragment_payement" />
+    <fragment
+        android:id="@+id/actualityFragment"
+        android:name="esprims.gi2.esprims.ActualityFragment"
+        android:label="fragment_actuality"
+        tools:layout="@layout/fragment_actuality" />
 </navigation>

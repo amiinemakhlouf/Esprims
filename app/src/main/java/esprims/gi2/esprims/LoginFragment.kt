@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,7 @@ import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment() {
+    private lateinit var viewModel: BaseViewModel
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
 
@@ -35,6 +37,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var emailFlag = false
         var passwordFlag = false
+        viewModel=ViewModelProvider(requireActivity()).get(BaseViewModel::class.java)
 
         auth = Firebase.auth
         isUserConnected()
@@ -73,7 +76,7 @@ class LoginFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-       // hideToolbar()
+        // hideToolbar()
 
     }
 
@@ -96,10 +99,13 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     // Log.d(TAG, "signInWithEmail:success")
-                    val uid=auth.uid
-                    val action = LoginFragmentDirections.actionLoginFragmentToDashbordFragment(uid!!)
 
-                    findNavController().navigate(action )
+                    val uid = auth.uid
+                    viewModel.userId= auth.currentUser!!.uid
+                    val action =
+                        LoginFragmentDirections.actionLoginFragmentToDashbordFragment(uid!!)
+
+                    findNavController().navigate(action)
 
 
                 } else {
@@ -134,6 +140,7 @@ class LoginFragment : Fragment() {
 
     fun isUserConnected() {
         if (auth.currentUser != null) {
+            viewModel.userId= auth.currentUser!!.uid
             val action =
                 LoginFragmentDirections.actionLoginFragmentToDashbordFragment(auth.currentUser!!.uid.toString())
             findNavController().navigate(action)

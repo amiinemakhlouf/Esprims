@@ -20,6 +20,7 @@
             android:id="@+id/toolbae"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:title="ESPRIMs"
             android:background="@color/blue_200"
             app:layout_constraintTop_toTopOf="parent"
 

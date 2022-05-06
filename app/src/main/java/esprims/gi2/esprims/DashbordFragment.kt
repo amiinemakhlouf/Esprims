@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -44,53 +46,74 @@ class DashbordFragment : Fragment() {
         Log.d("TAG", uid)
         var imageUrl:String?=null
 
-        db.collection("user")
-            .whereEqualTo("id", uid)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
+
+            if((activity as MainActivity).shouldFetch==true)
+            {
 
 
-                    val user = document.toObject<User>()
-                    gradeUid=user.class_id!!
-                    userName=user.name!!
-                    Log.d("TAG", gradeUid.toString())
-                    Log.d("TAG", userName!!)
+            db.collection("user")
+                .whereEqualTo("id", Firebase.auth.currentUser!!.uid)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
 
-                    db.collection("grade")
-                        .whereEqualTo("id", gradeUid)
-                        .get()
-                        .addOnSuccessListener { documents ->
-                            for (document in documents) {
-                                val grade = document.toObject<Grade>()
-                              imageUrl=grade.emploi
-                                gradeName=grade.name
-                                Glide.with(requireActivity())
-                                    .load(grade.emploi?.toUri())
-                                    .into(binding.emploi)
+
+                        val user = document.toObject<User>()
+                        gradeUid = user.class_id!!
+                        userName = user.name!!
+                        Log.d("TAG", gradeUid.toString())
+                        Log.d("TAG", userName!!)
+
+                        db.collection("grade")
+                            .whereEqualTo("id", gradeUid)
+                            .get()
+                            .addOnSuccessListener { documents ->
+                                for (document in documents) {
+                                    val grade = document.toObject<Grade>()
+                                    imageUrl = grade.emploi
+                                    gradeName = grade.name
+                                    binding.progressBar.isVisible = false
+                                    Log.d("test", Thread.currentThread().name + "")
+                                    (activity as MainActivity).shouldFetch = false
+                                    (activity as MainActivity).emlpoiEx=grade.emploiEx
+                                    Glide.with(requireActivity())
+                                        .load(grade.emploi?.toUri())
+                                        .into(binding.emploi)
+
+                                    (activity as MainActivity).emploi = grade.emploi
+                                    (activity as MainActivity).gradeUID = grade.id
+
+
+                                }
+
+                                handleHeaderNAvigation(userName, gradeName)
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.d("TAG", "no mistake")
 
                             }
-                            handleHeaderNAvigation(userName,gradeName)
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.d("TAG", "no mistake")
-
-                        }
-
-
-
+                    }
 
 
                 }
+
+                .addOnFailureListener { exception ->
+                    Toast.makeText(requireActivity(), "bad", Toast.LENGTH_LONG).show()
+                    Log.d("TAG", "no mistake")
+
+                }
             }
-            .addOnFailureListener { exception ->
-                Toast.makeText(requireActivity(),"bad",Toast.LENGTH_LONG).show()
-                Log.d("TAG", "no mistake")
 
+        else{
+            binding.progressBar.isVisible=false
+
+                Glide.with(requireActivity())
+                    .load((activity as MainActivity).emploi)
+                    .into(binding.emploi)
             }
 
 
-        Toast.makeText(activity, imageUrl,Toast.LENGTH_LONG).show()
+
 
 
 

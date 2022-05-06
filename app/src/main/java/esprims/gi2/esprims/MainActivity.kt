@@ -13,8 +13,12 @@ import esprims.gi2.esprims.databinding.ActivityMainBinding
 import esprims.gi2.esprims.databinding.HeaderNavigationDrawerBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit  var appBarConfiguration: AppBarConfiguration
+    var gradeUID: Int? = null
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+    var emlpoiEx: String? = null
+    var emploi: String? = null
+    var shouldFetch = true
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,24 +33,30 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-         navController = navHostFragment.findNavController()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.findNavController()
 
-         appBarConfiguration= AppBarConfiguration(
+        appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.dashbordFragment,
                 R.id.loginFragment,
-                R.id.blankFragment
+                R.id.emlpoiExamenFragment,
+                R.id.noteFragment,
+                R.id.payementFragment,
+                R.id.actualityFragment,
+                R.id.actualityFragment
+
             ),
 
             binding.drawerLayout
         )
         setSupportActionBar(binding.toolbae)
         binding.navView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
 
-        binding.navView.menu.findItem(R.id.logOut).setOnMenuItemClickListener{
+        binding.navView.menu.findItem(R.id.logOut).setOnMenuItemClickListener {
 
             Firebase.auth.signOut()
             finish()
@@ -55,21 +65,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-
-
-
     }
 
 
     //link toolbar with navigation view
     override fun onSupportNavigateUp(): Boolean {
-         return  navController.navigateUp(appBarConfiguration)
+        return navController.navigateUp(appBarConfiguration)
                 ||
-       super.onSupportNavigateUp()
+                super.onSupportNavigateUp()
     }
 
 

@@ -4,5 +4,7 @@ data class Grade(
 
         val id:Int?=null,
         val name:String?=null,
-        val emploi:String?=null
+        val emploi:String?=null,
+        val emploiEx:String?=null
+
         )
