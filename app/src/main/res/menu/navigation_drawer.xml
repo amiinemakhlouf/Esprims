@@ -5,6 +5,8 @@
             android:id="@+id/dashbordFragment"
             android:title="emploi du temps "
              />
+        <item android:id="@+id/coursFragment"
+                android:title="cours" />
         <item
             android:id="@+id/emlpoiExamenFragment"
             android:title="calendrier d'examen " />

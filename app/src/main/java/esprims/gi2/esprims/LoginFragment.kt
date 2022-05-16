@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -42,13 +43,22 @@ class LoginFragment : Fragment() {
         auth = Firebase.auth
         isUserConnected()
 
+        (activity as MainActivity).binding.toolbae.isVisible=false
+
+
+
+
+
         binding.loginButton.setOnClickListener {
+
             val emailInput = binding.email.editText?.text.toString()
             if (!isValidEmail(emailInput)) {
                 binding.email.error = "invalid email  "
+                it.isActivated=true
             } else {
                 binding.email.error = null
                 emailFlag = true
+
             }
 
             val passwordInput = binding.password.editText?.text.toString()
@@ -56,6 +66,7 @@ class LoginFragment : Fragment() {
             if (passwordInput.length < 8) {
 
                 binding.password.error = "password should contain at least 8 carachters"
+                it.isActivated=false
             } else {
                 binding.password.error = null
                 passwordFlag = true
@@ -65,6 +76,7 @@ class LoginFragment : Fragment() {
 
                 auth = Firebase.auth
                 signIn(emailInput, passwordInput)
+
 
             }
 
@@ -106,6 +118,8 @@ class LoginFragment : Fragment() {
                         LoginFragmentDirections.actionLoginFragmentToDashbordFragment(uid!!)
 
                     findNavController().navigate(action)
+
+
 
 
                 } else {

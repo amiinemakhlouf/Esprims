@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
@@ -46,8 +47,10 @@ class DashbordFragment : Fragment() {
         Log.d("TAG", uid)
         var imageUrl:String?=null
 
+        (activity as MainActivity).binding.toolbae.isVisible=true
 
-            if((activity as MainActivity).shouldFetch==true)
+
+        if((activity as MainActivity).shouldFetch==true)
             {
 
 
@@ -113,6 +116,16 @@ class DashbordFragment : Fragment() {
             }
 
 
+        binding.plus.setOnClickListener {
+            binding.zoomLayout.zoomIn()
+        }
+
+        binding.minus.setOnClickListener {
+            binding.zoomLayout.zoomOut()
+        }
+
+
+
 
 
 
@@ -135,5 +148,16 @@ class DashbordFragment : Fragment() {
 
         navViewHeaderBinding.grade.text = grade
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if ((activity as MainActivity).fromService==true){
+
+            this.findNavController().navigate(R.id.noteFragment)
+            Log.d("testit",(activity as MainActivity).fromService.toString())
+
+
+        }
     }
 }

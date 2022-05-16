@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -30,6 +31,9 @@ class NoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).binding.toolbae.isVisible=true
+        Log.d("test",(activity as MainActivity).gradeUID.toString() )
+
 
         var matiereAdapter=MatiereAdapter(mutableListOf())
         binding.noteRV.apply {
@@ -41,7 +45,6 @@ class NoteFragment : Fragment() {
         db.collection("matiere").whereEqualTo("class_id", (activity as MainActivity).gradeUID)
             .addSnapshotListener{ value,error->
 
-                Log.d("test","first")
              error?.let {
                  Toast.makeText(requireContext(),it.message,Toast.LENGTH_LONG).show()
                  return@addSnapshotListener

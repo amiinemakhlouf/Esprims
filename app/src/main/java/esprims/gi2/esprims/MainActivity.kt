@@ -1,7 +1,18 @@
 package esprims.gi2.esprims
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CallLog.Calls.PRIORITY
+import android.util.Log
+import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -19,23 +30,29 @@ class MainActivity : AppCompatActivity() {
     var emlpoiEx: String? = null
     var emploi: String? = null
     var shouldFetch = true
+    var fromService=false
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d(" testit",this.toString())
         // return to APP style after splash screen
         setTheme(R.style.Theme_Esprims)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.findNavController()
+
+
         binding.toolbae.setNavigationOnClickListener {
             val drawer = binding.drawerLayout
             drawer.open()
 
         }
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.findNavController()
+
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -45,12 +62,22 @@ class MainActivity : AppCompatActivity() {
                 R.id.noteFragment,
                 R.id.payementFragment,
                 R.id.actualityFragment,
-                R.id.actualityFragment
+                R.id.coursFragment
 
             ),
 
             binding.drawerLayout
         )
+      /*  navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            destination.label = when (destination.id) {
+                R.id.dashbordFragment -> resources.getString(R.string.app_name)
+                R.id.emlpoiExamenFragment -> "emploi d'examen"
+                R.id.noteFragment -> "note et absences"
+                R.id.payementFragment -> "payement"
+                R.id.actualityFragment-> "les actualités"
+                else -> resources.getString(R.string.app_name)
+            }
+        }*/
         setSupportActionBar(binding.toolbae)
         binding.navView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -59,9 +86,16 @@ class MainActivity : AppCompatActivity() {
         binding.navView.menu.findItem(R.id.logOut).setOnMenuItemClickListener {
 
             Firebase.auth.signOut()
-            finish()
+            startActivity(Intent.makeRestartActivityTask(this.intent?.component))
+
 
             true
+        }
+
+        Intent(this,MyService::class.java).putExtra(
+            "gradeID",gradeUID)
+        .also {
+            startService(it)
         }
 
 
@@ -74,6 +108,31 @@ class MainActivity : AppCompatActivity() {
                 ||
                 super.onSupportNavigateUp()
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent?.getStringExtra("origin")=="service"){
+            Log.d("testit","yes i'm here on new intent ")
+            fromService=true
+
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            navController = navHostFragment.findNavController()
+
+        }
+        else{
+            Log.d("testit","no not here")
+
+        }
+
+
+    }
+
+
+
+
+
+
 
 
 }

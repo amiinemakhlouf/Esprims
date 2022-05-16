@@ -23,6 +23,9 @@
         <argument
             android:name="user_id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_dashbordFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -33,15 +36,32 @@
         android:id="@+id/emlpoiExamenFragment"
         android:name="esprims.gi2.esprims.EmlpoiExamenFragment"
         android:label="fragment_emlpoi_examen"
-        tools:layout="@layout/fragment_emlpoi_examen" />
+        tools:layout="@layout/fragment_emlpoi_examen" >
+        <action
+            android:id="@+id/action_emlpoiExamenFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/payementFragment"
         android:name="esprims.gi2.esprims.PayementFragment"
         android:label="fragment_payement"
-        tools:layout="@layout/fragment_payement" />
+        tools:layout="@layout/fragment_payement" >
+        <action
+            android:id="@+id/action_payementFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/actualityFragment"
         android:name="esprims.gi2.esprims.ActualityFragment"
         android:label="fragment_actuality"
-        tools:layout="@layout/fragment_actuality" />
+        tools:layout="@layout/fragment_actuality" >
+        <action
+            android:id="@+id/action_actualityFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursFragment"
+        android:name="esprims.gi2.esprims.CoursFragment"
+        android:label="fragment_cours"
+        tools:layout="@layout/fragment_cours" />
 </navigation>

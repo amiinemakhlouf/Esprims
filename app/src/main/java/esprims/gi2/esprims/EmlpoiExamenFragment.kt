@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import esprims.gi2.esprims.databinding.FragmentEmlpoiExamenBinding
 
@@ -22,9 +23,20 @@ class EmlpoiExamenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.myProgressBar.isVisible=false
         Glide.with(requireActivity()).load((activity as MainActivity).emlpoiEx).into(binding.emploiEx)
 
+        binding.plus.setOnClickListener {
+            binding.zoomLayout.zoomIn()
+        }
+
+        binding.minus.setOnClickListener {
+            binding.zoomLayout.zoomOut()
+        }
+
     }
+
+
+
 
 }
