@@ -30,7 +30,7 @@ class MatiereAdapter(
         holder.binding.apply {
 
             matiere.text = dataSEt[position].nom
-            dataSEt[position].noteDs?.let {
+            dataSEt[position].noteDS?.let {
                 noteDS.text=" note ds :"+it.toString()
             }?: run {
                 noteDS.text = "note ds "

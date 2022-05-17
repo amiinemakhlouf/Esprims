@@ -61,13 +61,13 @@ class MyService : Service() {
     private fun sendNotification() {
         val intent: Intent =
             Intent(this, MainActivity::class.java).putExtra("origin", "service").apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or  Intent.FLAG_ACTIVITY_SINGLE_TOP
             }
         var pendingIntent:PendingIntent? =null
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
              pendingIntent =
                 PendingIntent.getActivity(this, 0, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
 
         }
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, "0")

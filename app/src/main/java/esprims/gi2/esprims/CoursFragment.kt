@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -31,7 +33,7 @@ class CoursFragment : Fragment() {
         val db = Firebase.firestore
 
         db.collection("matiere").whereEqualTo(
-            "class_id",0
+            "class_id",(activity as MainActivity).gradeUID
         ).addSnapshotListener{ value,error->
 
             error?.let {
@@ -49,6 +51,27 @@ class CoursFragment : Fragment() {
                 val arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_1,listofMatieresName)
                 binding.lv.adapter= arrayAdapter
             }
+
+
+        }
+        binding.lv.setOnItemClickListener { parent, view, position, id ->
+
+
+            val cours=binding.lv.getItemAtPosition(position)
+            when(cours){
+
+                "POO avancé"  ->{
+                    val action = CoursFragmentDirections.actionCoursFragmentToChapitreFragment("POO avancé")
+                    findNavController().navigate(action)
+                }
+                "developpement mobile" ->{
+                    val action = CoursFragmentDirections.actionCoursFragmentToChapitreFragment("developpement mobile")
+                    findNavController().navigate(action)
+
+                }
+            }
+
+
 
 
         }

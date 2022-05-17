@@ -6,7 +6,7 @@ data class Matiere(
     val nom: String? = null,
     val noteEX: Float? = null,
     val noteTP: Float? = null,
-    val noteDs: Float? = null,
+    val noteDS: Float? = null,
     val absence:Float?=0f
 
     )

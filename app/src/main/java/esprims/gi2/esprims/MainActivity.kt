@@ -22,7 +22,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import esprims.gi2.esprims.databinding.ActivityMainBinding
 import esprims.gi2.esprims.databinding.HeaderNavigationDrawerBinding
-
 class MainActivity : AppCompatActivity() {
     var gradeUID: Int? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -36,7 +35,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d(" testit",this.toString())
+
+        Log.d(" testitfromcreate",this.toString())
         // return to APP style after splash screen
         setTheme(R.style.Theme_Esprims)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -68,16 +68,17 @@ class MainActivity : AppCompatActivity() {
 
             binding.drawerLayout
         )
-      /*  navController.addOnDestinationChangedListener { controller, destination, arguments ->
+       navController.addOnDestinationChangedListener { controller, destination, arguments ->
             destination.label = when (destination.id) {
                 R.id.dashbordFragment -> resources.getString(R.string.app_name)
                 R.id.emlpoiExamenFragment -> "emploi d'examen"
                 R.id.noteFragment -> "note et absences"
                 R.id.payementFragment -> "payement"
                 R.id.actualityFragment-> "les actualités"
+                R.id.coursFragment ->"cours "
                 else -> resources.getString(R.string.app_name)
             }
-        }*/
+        }
         setSupportActionBar(binding.toolbae)
         binding.navView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -111,9 +112,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        Log.d("testitmenitent","yes i'm here on new intent ")
+
         if (intent?.getStringExtra("origin")=="service"){
-            Log.d("testit","yes i'm here on new intent ")
             fromService=true
+
+
 
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

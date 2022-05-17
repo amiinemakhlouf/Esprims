@@ -63,5 +63,20 @@
         android:id="@+id/coursFragment"
         android:name="esprims.gi2.esprims.CoursFragment"
         android:label="fragment_cours"
-        tools:layout="@layout/fragment_cours" />
+        tools:layout="@layout/fragment_cours" >
+        <action
+            android:id="@+id/action_coursFragment_to_chapitreFragment"
+            app:destination="@id/chapitreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chapitreFragment"
+        android:name="esprims.gi2.esprims.ChapitreFragment"
+        android:label="fragment_chapitre"
+        tools:layout="@layout/fragment_chapitre" >
+        <argument
+            android:name="chapitre"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
