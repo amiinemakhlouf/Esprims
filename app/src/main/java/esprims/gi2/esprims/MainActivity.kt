@@ -93,11 +93,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        Intent(this,MyService::class.java).putExtra(
-            "gradeID",gradeUID)
-        .also {
-            startService(it)
-        }
+
 
 
     }
@@ -114,20 +110,7 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         Log.d("testitmenitent","yes i'm here on new intent ")
 
-        if (intent?.getStringExtra("origin")=="service"){
-            fromService=true
-
-
-
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            navController = navHostFragment.findNavController()
-
-        }
-        else{
-            Log.d("testit","no not here")
-
-        }
+        fromService = intent?.getStringExtra("origin")=="service"
 
 
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -39,6 +40,7 @@ class LoginFragment : Fragment() {
         var emailFlag = false
         var passwordFlag = false
         viewModel=ViewModelProvider(requireActivity()).get(BaseViewModel::class.java)
+        (activity as MainActivity).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         auth = Firebase.auth
         isUserConnected()

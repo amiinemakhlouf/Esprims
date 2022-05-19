@@ -1,5 +1,6 @@
 package esprims.gi2.esprims
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -48,6 +50,7 @@ class DashbordFragment : Fragment() {
         var imageUrl:String?=null
 
         (activity as MainActivity).binding.toolbae.isVisible=true
+        (activity as MainActivity).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED)
 
 
         if((activity as MainActivity).shouldFetch==true)
@@ -85,6 +88,13 @@ class DashbordFragment : Fragment() {
 
                                     (activity as MainActivity).emploi = grade.emploi
                                     (activity as MainActivity).gradeUID = grade.id
+                                    Log.d("testitgrade",grade.id.toString())
+                                    Intent(requireActivity(),MyService::class.java).putExtra(
+                                        "gradeID",(activity as MainActivity).gradeUID)
+                                        .also {
+                                            Log.d("testitGrade",(activity as MainActivity).gradeUID.toString())
+                                            requireActivity().startService(it)
+                                        }
 
 
                                 }
@@ -135,6 +145,10 @@ class DashbordFragment : Fragment() {
 
 
 
+
+
+
+
     }
 
     private fun handleHeaderNAvigation(name:String?,grade:String?) {
@@ -152,11 +166,14 @@ class DashbordFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("testit",(activity as MainActivity).fromService.toString())
+
         if ((activity as MainActivity).fromService==true){
 
             this.findNavController().navigate(R.id.noteFragment)
             Log.d("testit",(activity as MainActivity).fromService.toString())
 
+            (activity as MainActivity).fromService=false
 
         }
     }

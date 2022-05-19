@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.firestore.ktx.firestore
@@ -26,6 +27,8 @@ class MyService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         var shouldFetch = false
         val id = intent!!.getIntExtra("gradeID", 0)
+        Log.d("testitgrade",id.toString())
+        Log.d("testitgrademenservice",id.toString())
         val db = Firebase.firestore
         db.collection("matiere").whereEqualTo("class_id", id)
             .addSnapshotListener { value, error ->
