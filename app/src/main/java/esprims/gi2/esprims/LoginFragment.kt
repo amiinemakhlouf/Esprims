@@ -45,7 +45,8 @@ class LoginFragment : Fragment() {
         auth = Firebase.auth
         isUserConnected()
 
-        (activity as MainActivity).binding.toolbae.isVisible=false
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
 
 
 

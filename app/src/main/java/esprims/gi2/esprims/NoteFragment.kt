@@ -31,7 +31,6 @@ class NoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).binding.toolbae.isVisible=true
         Log.d("test",(activity as MainActivity).gradeUID.toString() )
 
 

@@ -32,7 +32,6 @@ class PayementFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).binding.toolbae.isVisible=true
 
         val db = FirebaseFirestore.getInstance()
         db.collection("payement").whereEqualTo("userID", Firebase.auth.currentUser!!.uid)

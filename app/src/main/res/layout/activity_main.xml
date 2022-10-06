@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:theme="@style/Theme.AppCompat.DayNight">
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="ESPRIMs"
+            app:navigationIcon="@drawable/ic_baseline_menu_24"
+
+
             android:background="@color/blue_200"
             app:layout_constraintTop_toTopOf="parent"
 

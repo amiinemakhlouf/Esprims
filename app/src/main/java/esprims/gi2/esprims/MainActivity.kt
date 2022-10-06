@@ -38,19 +38,16 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(" testitfromcreate",this.toString())
         // return to APP style after splash screen
-        setTheme(R.style.Theme_Esprims)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
 
+        setSupportActionBar(binding.toolbae)
 
-        binding.toolbae.setNavigationOnClickListener {
-            val drawer = binding.drawerLayout
-            drawer.open()
 
-        }
+
 
 
 
@@ -79,9 +76,8 @@ class MainActivity : AppCompatActivity() {
                 else -> resources.getString(R.string.app_name)
             }
         }
-        setSupportActionBar(binding.toolbae)
         binding.navView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
 
 
         binding.navView.menu.findItem(R.id.logOut).setOnMenuItemClickListener {

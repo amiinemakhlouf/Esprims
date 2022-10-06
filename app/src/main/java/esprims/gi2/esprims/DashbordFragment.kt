@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -35,6 +36,8 @@ class DashbordFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDashbordBinding.inflate(layoutInflater)
         headerBinding= HeaderNavigationDrawerBinding.inflate(layoutInflater)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+
         return binding.root
     }
    val args:  DashbordFragmentArgs by navArgs()
@@ -49,7 +52,7 @@ class DashbordFragment : Fragment() {
         Log.d("TAG", uid)
         var imageUrl:String?=null
 
-        (activity as MainActivity).binding.toolbae.isVisible=true
+
         (activity as MainActivity).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED)
 
 
