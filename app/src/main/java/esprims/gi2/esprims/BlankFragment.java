@@ -15,7 +15,7 @@ import android.view.ViewGroup;
  */
 public class BlankFragment extends Fragment {
 
-    hugo loris 555555555555554444
+    hugo loris 555555555555554444lllo
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
