@@ -34,7 +34,7 @@ class ActualityFragment : Fragment() {
         var actualityRV = binding.actualiteRV
         val adapter = ActualityAdapter(requireActivity(),mutableListOf())
         actualityRV.layoutManager = LinearLayoutManager(requireActivity())
-     fdsfs
+     fdsfs dd
         actualityRV.adapter = adapter
 
         val db = Firebase.firestore
